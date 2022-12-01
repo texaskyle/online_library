@@ -1,6 +1,6 @@
 <?php
-include 'library_database.php';
 
+include 'library_database.php';
 // checking if the user clicked the login button
 if (isset($_POST['login_submit'])) {
     // taking the details from the users input login page
@@ -28,10 +28,7 @@ if (isset($_POST['login_submit'])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if ($row = mysqli_fetch_assoc($result)) {
-                echo $row['username'];
-                echo $row['id'];
-                echo $row['email'];
-                echo $row['pwd'];
+                
                 #$pwdcheck = password_verify($pwd_hash, $row['pwd']);
                   #die();
                 #if ($pwdcheck == true) {
@@ -39,7 +36,12 @@ if (isset($_POST['login_submit'])) {
                     session_start();
                     $_SESSION['userId'] = $row['id'];
                     $_SESSION['username'] = $row['username'];
-                     header("Location:../login.php?login=success");
+                    header("Location: ../students/student.home.php");
+                     
+                    echo $row['username'];
+                    echo $row['id'];
+                    echo $row['email'];
+                    echo $row['pwd'];
                     exit();
                 }
                 else {
@@ -53,3 +55,4 @@ if (isset($_POST['login_submit'])) {
 }else{
     echo "click the login button";
 }
+?>

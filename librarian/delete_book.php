@@ -19,12 +19,13 @@ if (isset($_GET['search_button']) && strlen($_GET['search']) >= 3) {
     $query_run = mysqli_query($conn, $query);
     $no_of_rows = mysqli_num_rows($query_run);
 
-    if ($no_of_rows > 0) {
+    
         echo "There were " . $no_of_rows . " results obtained <br>";
 
-        echo " <strong>Search Results:</strong>
-             <table>
-        <tr>
+        echo " <strong>Search Results:</strong>";
+        echo "<table>";
+             if ($no_of_rows > 0) {
+       echo" <tr>
             <th style='margin:5px' ;>book id</th>
             <th>book isbn</th>
             <th>book title</th>
@@ -47,6 +48,7 @@ if (isset($_GET['search_button']) && strlen($_GET['search']) >= 3) {
                 </tr>";
            
         }
+        echo "</table>";
     } else {
         echo "The searched book didnt match any book in the database";
     }

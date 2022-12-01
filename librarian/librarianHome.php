@@ -1,5 +1,6 @@
 <?php
 include 'librarianHeader.php';
+session_start();
 ?>
 
 
@@ -12,7 +13,12 @@ include 'librarianHeader.php';
     <li> <a href="pending_reg_member.php">Manage pending book request</a></li>
     <li> <a href="update_balance">Update balance of members</a></li>
     <li> <a href="due_handler.php">Today's reminder</a></li>
+    <li> <a href="pending_registration.php">Pending registration</a></li>
 </ul>
+
+<form action="logoutAdmin.php" method="POST">
+    <button type="submit" name="logoutAdmin">Logout</button>
+</form>
 
 
 

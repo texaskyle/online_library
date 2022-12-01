@@ -18,3 +18,16 @@ CREATE TABLE books(
     b_price INT(11) NOT NULL
     
 );
+
+CREATE TABLE verified_users(
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(256) NOT NULL,
+    email VARCHAR(256) NOT NULL,
+    pwd VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE profileimg(
+    id 	INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    userid INT(11) NOT NULL,
+    status INT(11)
+);

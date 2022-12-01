@@ -47,7 +47,7 @@ if (isset($_POST['login_submit'])) {
                         header("Location:../studentLogin.php");
                     }
                 } else {
-                    header("Location:../login.php?error=wrongPassword");
+                    header("Location:../index.php?error=wrongPassword");
                     exit();
                     echo "login diened";
                 }

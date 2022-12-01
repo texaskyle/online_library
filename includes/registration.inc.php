@@ -38,9 +38,22 @@ include 'library_database.php';
                     $query_run = mysqli_query($conn, $query);
                     if (!$query_run) {
                         echo "query to insert users inside the database didnt run";
+                    }else{
+                    $sql = "SELECT * FROM users WHERE username='$username' AND reg_no='$reg_no';";
+                    $sql_run = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($sql_run) > 0) {
+                        while ($row = mysqli_fetch_assoc($sql_run)) {
+                            $id = $row['id'];
+                        $sqlquery = "INSERT INTO profileimg (userid, status) VALUES('$id', 1);";
+                        $sql_run=mysqli_query($conn, $sqlquery);
+                        echo "successful signup";
+                        header("Location:../login.php?registrationSuccessful");
+                        }
+                        
                     }
-                     header("Location:../login.php");
-                    
+                
+                     
+                }
                 }
             }
     }else{

@@ -64,39 +64,46 @@
         echo "<strong> currently there are no books of this category </strong>";
     }
 
-    ?>
+    // query to fetch a book from the database 
+        
+        if (!empty($_POST['book_id'])) {
+            # code...
+            if (isset($_POST['book_id'])) {
+                $book_id = mysqli_real_escape_string($conn, $_POST['book_id']);
+                $sql = "SELECT * FROM books where book_id = '$book_id ';";
+                $sql_run = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($sql_run) > 0) {
+                    while ($row = mysqli_fetch_assoc($sql_run)) {
+                       session_start();
+                      
+                    echo  $_SESSION['b_title'] = $row['b_title'];
+                        echo "<br>";
+                    }
+                } else {
+                    echo "no such book in the database";
+                }
+            } else {
+                header("Location: technology.php?emptyField");
+            }
+        }
+
+        ?>
+
+
     <form action='#' method='POST'>
         <p>Enter the book id that you want to request for:</p>
         <input type="number" name="book_id" placeholder="book id" require><br><br>
-
-        <!-- query to fetch a book from the database -->
-        <?php
-        if (!empty($_POST['book_id'])) {
-            # code...
-        if(isset($_POST['book_id'])){
-           $book_id = mysqli_real_escape_string($conn, $_POST['book_id']);
-        $sql = "SELECT * FROM books where book_id = '$book_id ';";
-        $sql_run = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($sql_run) > 0) {
-            while ($row = mysqli_fetch_assoc($sql_run)) {
-                echo $row['b_title'];
-               echo "<br>";
-            }
-        }else{
-            echo "no such book in the database";
-        }
-        
-    }else{
-        header("Location: technology.php?emptyField");
-    }
-
-            
-
-        }
-        
-        ?>
-        <button type='submit' name='request'>Request book/ books</button>
+        <button type='submit' name='request'>Search</button>
+        <br>
+        <!-- <button type='submit' name='request'>Request book/ books</button> -->
     </form>
+
+    <!-- a form to add books in the students catalogue -->
+    <?php
+    if (isset($_SESSION['b_title'])) {
+        header("location: bookCatalogue.php?requestSuccessful");
+    }
+    ?>
     <br>
     <a href="../student.home.php">Go back</a>
 
